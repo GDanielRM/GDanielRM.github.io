@@ -452,6 +452,15 @@ cite {
   padding: 0;
 }
 
+.list-services-arrow{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.list-services-arrow :hover {
+  color: #4AA951;
+}
+
 ul.list-arrow li:before {
   font-family: "Font Awesome 5 Free";
   content: "\f105";
@@ -3436,7 +3445,7 @@ label {
 
 .widget.recent-posts .posts-thumb img {
   margin-right: 15px;
-  width: 90px;
+  width: 120px;
   height: 70px;
 }
 
