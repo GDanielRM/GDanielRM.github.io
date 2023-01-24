@@ -2185,9 +2185,9 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
 /* Clients */
 .clients-logo {
   margin: 0 0 30px;
-  /* border: 1px solid #dadada; */
-  min-height: 105px;
-  padding: 0 15px;
+  border: 1px solid #dadada;
+  min-height: 90px;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2196,10 +2196,10 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
 }
 
 .clients-logo img {
-  /* -webkit-filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
   -webkit-filter: gray;
-          filter: gray; */
+          filter: gray;
 }
 
 /* Testimonial
@@ -2576,6 +2576,10 @@ img.testimonial-thumb {
 
 @media (max-width: 767px) {
   #back-to-top {
+    right: 15px;
+  }
+
+  #whatsapp {
     right: 15px;
   }
 }

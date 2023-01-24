@@ -218,26 +218,26 @@ jQuery(function ($) {
 				prevArrow: '<button type="button" class="carousel-control left" aria-label="carousel-control"><i class="fas fa-chevron-left"></i></button>',
 				nextArrow: '<button type="button" class="carousel-control right" aria-label="carousel-control"><i class="fas fa-chevron-right"></i></button>',
 				responsive: [{
-						breakpoint: 992,
-						settings: {
-							slidesToShow: 3,
-							slidesToScroll: 3
-						}
-					},
-					{
-						breakpoint: 768,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 2
-						}
-					},
-					{
-						breakpoint: 481,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1
-						}
+					breakpoint: 992,
+					settings: {
+						slidesToShow: 3,
+						slidesToScroll: 3
 					}
+				},
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 2
+					}
+				},
+				{
+					breakpoint: 481,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				}
 				]
 			});
 		}
@@ -259,5 +259,67 @@ jQuery(function ($) {
 		}
 		mediaPopup();
 
+
+		$("#contact-form").validate({
+			rules: {
+				name: { required: true, minlength: 10, maxlength: 50 },
+				email: { required: true, minlength: 10, email: true },
+				subject: { required: true, minlength: 10, maxlength: 50 },
+				message: { required: true, minlength: 15, maxlength: 400 }
+			},
+			messages: {
+				name: {
+					required: "Por favor, ingrese su nombre",
+					minlength: "El nombre debe contener el menos 10 caracteres",
+					maxlength: "El nombre debe contener maximo 50 caracteres",
+					number: "El nombre no puede contener numeros"
+				},
+				email: {
+					required: "Por favor, ingrese su correo electronico",
+					minlength: "El correo electronico debe contener al menos 10 caracteres"
+				},
+				subject: {
+					required: "Por favor, indique el asunto del correo",
+					minlength: "El asunto debe contener el menos 10 caracteres",
+					maxlength: "El asunto debe contener maxico 50 caracteres"
+				},
+				message: {
+					required: "Por favor, describa en que podemos ayudarle",
+					minlength: "El asunto debe contener el menos 15 caracteres",
+					maxlength: "El asunto debe contener maxico 400 caracteres"
+				}
+			}
+		});
+
+		$('#sendMail').on('click', function () {
+			if (!$("#contact-form").valid()) {
+				return;
+			}
+
+			let name = $('#name').val();
+			let email = $('#email').val();
+			let subject = $('#subject').val();
+			let message = $('#message').val();
+
+			const data = {
+				name: name,
+				email: email,
+				subject: subject,
+				message: message
+			};
+
+			$.ajax({
+				url: "php/main.php",
+				type: 'post',
+				data: data,
+				success: function (response) {
+					console.log(response);
+				},
+				error: function (response) {
+					console.log(response);
+				}
+			});
+
+		});
 	});
 });
