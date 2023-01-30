@@ -243,7 +243,6 @@ jQuery(function ($) {
 		}
 		teamCarousel();
 
-
 		// media popup
 		function mediaPopup() {
 			$('.gallery-popup').colorbox({
@@ -260,38 +259,39 @@ jQuery(function ($) {
 		mediaPopup();
 
 
-		$("#contact-form").validate({
-			rules: {
-				name: { required: true, minlength: 10, maxlength: 50 },
-				email: { required: true, minlength: 10, email: true },
-				subject: { required: true, minlength: 10, maxlength: 50 },
-				message: { required: true, minlength: 15, maxlength: 400 }
-			},
-			messages: {
-				name: {
-					required: "Por favor, ingrese su nombre",
-					minlength: "El nombre debe contener el menos 10 caracteres",
-					maxlength: "El nombre debe contener maximo 50 caracteres",
-					number: "El nombre no puede contener numeros"
-				},
-				email: {
-					required: "Por favor, ingrese su correo electronico",
-					minlength: "El correo electronico debe contener al menos 10 caracteres"
-				},
-				subject: {
-					required: "Por favor, indique el asunto del correo",
-					minlength: "El asunto debe contener el menos 10 caracteres",
-					maxlength: "El asunto debe contener maxico 50 caracteres"
-				},
-				message: {
-					required: "Por favor, describa en que podemos ayudarle",
-					minlength: "El asunto debe contener el menos 15 caracteres",
-					maxlength: "El asunto debe contener maxico 400 caracteres"
-				}
-			}
-		});
 
 		$('#sendMail').on('click', function () {
+			$("#contact-form").validate({
+				rules: {
+					name: { required: true, minlength: 10, maxlength: 50 },
+					email: { required: true, email: true },
+					subject: { required: true, minlength: 10, maxlength: 50 },
+					message: { required: true, minlength: 15, maxlength: 400 }
+				},
+				messages: {
+					name: {
+						required: "Por favor, ingrese su nombre",
+						minlength: "El nombre debe contener el menos 10 caracteres",
+						maxlength: "El nombre debe contener maximo 50 caracteres",
+						number: "El nombre no puede contener numeros"
+					},
+					email: {
+						required: "Por favor, ingrese su correo electronico",
+						minlength: "El correo electronico debe contener al menos 10 caracteres"
+					},
+					subject: {
+						required: "Por favor, indique el asunto del correo",
+						minlength: "El asunto debe contener el menos 10 caracteres",
+						maxlength: "El asunto debe contener maxico 50 caracteres"
+					},
+					message: {
+						required: "Por favor, describa en que podemos ayudarle",
+						minlength: "El asunto debe contener el menos 15 caracteres",
+						maxlength: "El asunto debe contener maxico 400 caracteres"
+					}
+				}
+			});
+
 			if (!$("#contact-form").valid()) {
 				return;
 			}
@@ -319,6 +319,87 @@ jQuery(function ($) {
 					console.log(response);
 				}
 			});
+
+		});
+
+
+		$('#enterEmail').keypress(function (event) {
+			if (event.keyCode !== 13) {
+				console.log("another key");
+				return;
+			}
+
+			$("#contact-mail").validate({
+				rules: {
+					enterEmail: { required: true, email: true }
+				},
+				messages: {
+					enterEmail: {
+						required: "Por favor, ingrese su correo electronico",
+						minlength: "El correo electronico debe contener al menos 10 caracteres"
+					}
+				}
+			});
+
+
+			if (!$("#contact-mail").valid()) {
+				console.log("invalid form");
+				return;
+			}
+
+			let email = $('#enterEmail').val();
+
+			const data = {
+				name: "",
+				email: email,
+				subject: "",
+				message: "",
+				type: 1
+			};
+
+			console.log(data);
+
+			$.ajax({
+				url: "php/main.php",
+				type: 'post',
+				data: data,
+				success: function (response) {
+					console.log(response);
+				},
+				error: function (response) {
+					console.log(response);
+				}
+			});
+
+		});
+
+		const estados = ["SIN", "SON", "BCN", "BCS", "CHH", "NLE", "DUR", "NAY", "JAL", "MIC", "GUA", "CDMX"];
+		$('#estados').mouseover(function (event) {
+
+			if ($.inArray(event.target.id, estados) != -1) {
+				$("#" + event.target.id + "_svg").css({ "fill": "#5CC1AB", "transition": "all 0.3s ease 0s" });
+			}
+
+		});
+
+		$('#estados').mouseout(function (event) {
+			if ($.inArray(event.target.id, estados) != -1) {
+				$("#" + event.target.id + "_svg").css({ "fill": "#4AA951", "transition": "all 0.3s ease 0s" });
+			}
+		});
+
+		$('#svg_map').mouseover(function (event) {
+			if ($.inArray(event.target.id.split("_")[0], estados) != -1) {
+				$("#" + event.target.id).css({ "fill": "#5CC1AB", "transition": "all 0.3s ease 0s" });
+				$("#" + event.target.id.split("_")[0]).addClass("estado_hover");
+			}
+		});
+
+		$('#svg_map').mouseout(function (event) {
+			if ($.inArray(event.target.id.split("_")[0], estados) != -1) {
+				$("#" + event.target.id).css({ "fill": "#4AA951", "transition": "all 0.3s ease 0s" });
+				$("#" + event.target.id.split("_")[0]).removeClass("estado_hover");
+			}
 
 		});
 	});

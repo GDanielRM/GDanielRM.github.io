@@ -1,6 +1,4 @@
 <?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -9,17 +7,31 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
-//Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
 try {
-    // $name = $_POST['name'];
-    // $email = $_POST['email'];
-    // $subject = $_POST['subject'];
-    // $message = $_POST['message'];
+    $type = $_POST['type'];
+
+    if ($type == 1) {
+        $name = "N/A";
+        $email = $_POST['email'];
+        $subject = "N/A";
+        $message = "N/A";
+    } else {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $message = $_POST['message'];
+    }
+
     $htmlTemplate = fopen('plantilla-email.html','r');
     $htmlTemplateString = stream_get_contents($htmlTemplate); 
-    // echo($string);
+    
+    $htmlTemplateString = str_replace("nombre_label",$name,$htmlTemplateString);
+    $htmlTemplateString = str_replace("correo_label",$email,$htmlTemplateString);
+    $htmlTemplateString = str_replace("asunto_label",$subject,$htmlTemplateString);
+    $htmlTemplateString = str_replace("mensaje_label",$message,$htmlTemplateString);
+    $htmlTemplateString = str_replace("á",'&aacute;',str_replace("é",'&eacute;',str_replace("í",'&iacute;',str_replace("ó",'&oacute;',str_replace("ú",'&uacute;',$htmlTemplateString)))));
 
     //Server settings
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -47,12 +59,17 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Contacto enviado desde wwww.biosima.org';
-    // $mail->Body    = '<h3>Asunto</h3><br>'. $subject .'<br><h3>Nombre</h3><br>'. $name .'<br><h3>Correo</h3><br>'. $email .'<br><h3>Mensaje</h3><br>'. $message .'<br>';
     $mail->Body    = $htmlTemplateString;
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    echo 'Message has been sent';
+
+    $json = array();
+    $json["status"] = 1;
+    $json["mensaje"] = "Correo enviado correctamente";
+    echo json_encode($json);
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    $json["status"] = 0;
+    $json["mensaje"] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo json_encode($json);
 }

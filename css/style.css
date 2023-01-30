@@ -2731,7 +2731,8 @@ img.testimonial-thumb {
 }
 
 .page-slider.small-bg .box-slider-content {
-  left: 20%;
+  text-align: center;
+  /* left: 20%; */
 }
 
 .page-slider.small-bg .box-slider-text {
@@ -3355,11 +3356,11 @@ label {
   line-height: 30px;
 }
 
-.sidebar .widget ul li a {
+.sidebar .widget ul li {
   color: #303030;
 }
 
-.sidebar .widget ul li a:hover {
+.sidebar .widget ul li:hover {
   color: #4AA951;
 }
 
@@ -3481,7 +3482,7 @@ label {
   margin: 3px;
 }
 
-.sidebar .widget-tags ul > li a {
+.sidebar .widget-tags ul > li {
   border: 1px solid #dadada;
   color: #303030;
   display: block;
@@ -3490,7 +3491,7 @@ label {
   transition: all 0.3s ease 0s;
 }
 
-.sidebar .widget-tags ul > li a:hover {
+.sidebar .widget-tags ul > li:hover {
   background: #4AA951;
   color: #fff;
   border: 1px solid transparent;
@@ -3529,4 +3530,21 @@ label {
 
 .whatsapp-icon {
   margin-top:13px;
+}
+
+.mapa-div{
+  width: 130%;
+  margin: auto;
+}
+
+#svg_map path {
+  fill: #d9d9d9;
+  stroke: #ffffff;
+  stroke-width: 1px;
+}
+
+.estado_hover{
+  background-color: #4AA951;
+  color: #ffffff !important;
+  transition: all 0.3s ease 0s;
 }
