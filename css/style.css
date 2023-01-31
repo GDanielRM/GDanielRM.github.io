@@ -1714,6 +1714,7 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
   font-size: 36px;
   float: left;
   color: #4AA951;
+  text-align: justify;
 }
 
 .ts-service-box .ts-service-box-content {
@@ -1870,6 +1871,7 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
 
 .ts-service-info {
   margin-left: 30px;
+  text-align: justify;
 }
 
 .ts-service-info h3 {
@@ -2455,6 +2457,7 @@ img.testimonial-thumb {
 
 .footer-main {
   padding: 80px 0 60px;
+  text-align: justify;
 }
 
 .footer .widget-title {
@@ -3547,4 +3550,8 @@ label {
   background-color: #4AA951;
   color: #ffffff !important;
   transition: all 0.3s ease 0s;
+}
+
+.entry-content{
+  text-align: justify;
 }
