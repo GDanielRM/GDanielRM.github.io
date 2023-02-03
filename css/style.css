@@ -431,7 +431,7 @@ cite {
 .list-round,
 .list-arrow,
 .list-check {
-  list-style: none;
+  /* list-style: none; */
   margin: 0;
   padding: 0 0 0 15px;
 }
@@ -453,8 +453,9 @@ cite {
 }
 
 .list-services-arrow{
+  text-align: justify;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .list-services-arrow :hover {
@@ -463,7 +464,7 @@ cite {
 
 ul.list-arrow li:before {
   font-family: "Font Awesome 5 Free";
-  content: "\f105";
+  /* content: "\f105"; */
   margin-right: 10px;
   color: #4AA951;
   font-size: 16px;
@@ -3553,5 +3554,9 @@ label {
 }
 
 .entry-content{
+  text-align: justify;
+}
+
+.justify {
   text-align: justify;
 }
