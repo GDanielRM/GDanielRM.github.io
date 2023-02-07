@@ -258,6 +258,27 @@ jQuery(function ($) {
 		}
 		mediaPopup();
 
+		// importHtmlCache();
+		function importHtmlCache(){
+			let file = self.location.href.split("/");
+			let size = file.length;
+			let path = '';
+			
+			if (
+				file[size-1] == 'control-y-prevencion-de-la-contaminacion' ||
+				file[size-1] == 'gestoria-y-tramitologia-gubernamental' ||
+				file[size-1] == 'impacto-y-riesgo-ambiental' ||
+				file[size-1] == 'levantamientos-topograficos-y-elaboracion-de-proyectos' ||
+				file[size-1] == 'materia-agua' ||
+				file[size-1] == 'seguridad-laboral'
+			) {
+				path = '../cache.html';
+			} else {
+				path = 'cache.html';
+			}
+
+			$('#cache').load(path);
+		}
 
 
 		$('#sendMail').on('click', function () {
