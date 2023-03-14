@@ -394,7 +394,7 @@ jQuery(function ($) {
 
 		});
 
-		const estados = ["SIN", "SON", "BCN", "BCS", "CHH", "NLE", "DUR", "NAY", "JAL", "MIC", "GUA", "CDMX", "MEX", "MOR"];
+		const estados = ["SIN", "SON", "BCN", "BCS", "CHH", "NLE", "DUR", "NAY", "JAL", "MIC", "GUA", "CDMX", "MEX", "MOR", "TLA", "OAX"];
 		$('#estados').mouseover(function (event) {
 
 			if ($.inArray(event.target.id, estados) != -1) {
